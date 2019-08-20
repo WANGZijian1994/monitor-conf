@@ -1,0 +1,55 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://10.101.12.44:3306/monitor-conf?useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: chinadep@123
+  redis:
+    host: 10.101.12.44
+    port: 6379
+    timeout: 60000
+    database: 3
+eureka:
+  client:
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://10.101.12.44:8761/eureka/
+swagger:
+  apply-default-response-messages: false
+  base-package: com.chinadep.monitor
+  base-path: /**
+  contact:
+    email: jovi@chinadep.com
+    name: jovi mao
+  description: 监控中心
+  enabled: true
+  exclude-path: /error, /ops/**
+  global-response-message:
+    get:
+      -   code: 401
+          message: 401get
+      -   code: 500
+          message: 500get
+          modelRef: ERROR
+    post:
+      -   code: 500
+          message: 500post
+          modelRef: ERROR
+  globalOperationParameters:
+    -   description: some description one
+        modelRef: string
+        name: name one
+        parameterType: header
+        required: true
+    -   description: some description two
+        modelRef: string
+        name: name two
+        parameterType: body
+        required: false
+  license: Apache License, Version 2.0
+  licenseUrl: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfServiceUrl: https://github.com/dyc87112/spring-boot-starter-swagger
+  title: spring-boot-starter-swagger
+  version: 1.4.0.RELEASE

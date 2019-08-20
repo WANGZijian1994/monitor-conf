@@ -1,0 +1,9 @@
+server:
+  port: 9100
+spring:
+  profiles:
+    active: @spring.profiles.active@
+  application:
+    name: chinadep-alert
+logging:
+  config: classpath:logback.xml

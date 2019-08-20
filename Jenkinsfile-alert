@@ -1,0 +1,26 @@
+pipeline {
+   agent {
+       docker {
+           image 'maven:3-alpine'
+            args '-v /opt/maven_repository:/root/.m2/repository/ -v /opt/minio/dds/monitor:/opt/'
+       }
+   }
+
+    stages {
+        stage('代码构建') {
+            steps {
+                sh 'mvn clean -X package -Dmaven.test.skip=true -Dspring.profiles.active=development'
+            }
+        }
+        stage('jar包上传') {
+            steps {
+                sh 'mkdir -p /opt/1.0.0/ && cp /root/.jenkins/workspace/chinadep-monitor-alert/chinadep-alert/chinadep-alert-provider/target/*.jar /opt/1.0.0/'
+            }
+        }
+        stage('配置文件上传') {
+            steps {
+                sh 'cp /root/.jenkins/workspace/chinadep-monitor-alert/chinadep-alert/chinadep-alert-provider/src/main/resources/application.properties /opt/1.0.0/application-alert.properties'
+            }
+        }
+    }
+}

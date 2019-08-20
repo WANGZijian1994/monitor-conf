@@ -1,0 +1,12 @@
+server:
+  port: 9101
+spring:
+  profiles:
+    active: @spring.profiles.active@
+  application:
+    name: chinadep-monitor
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 30000
+logging:
+  config: classpath:logback.xml
